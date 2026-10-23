@@ -61,6 +61,11 @@ a{color:inherit}
 .pick b{display:block;font-size:17px}
 .pick span{color:var(--muted);font-size:14px}
 .pick ol{margin:6px 0 0;padding-left:20px}
+.lesson{margin-top:10px;background:var(--card2);border-radius:14px;padding:12px 14px;font-size:15px;line-height:1.45}
+.lesson b.lt{display:block;font-size:17px;margin-bottom:4px}
+.lesson h4{margin:10px 0 2px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.lesson ul{margin:2px 0 0;padding-left:20px}
+.lesson .links a{color:var(--accent);font-weight:650;margin-right:12px}
 .big{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:62px;margin-top:14px;border-radius:18px;font-size:19px;font-weight:750;
   background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-decoration:none;box-shadow:0 8px 22px color-mix(in srgb,var(--accent2) 35%,transparent);transition:transform .08s}
 .big:active{transform:scale(.98)}
@@ -225,6 +230,24 @@ var HANDS = [
   ["holding a phone","resting chin on hand","hand on heart","snapping fingers","grabbing a sleeve","palm up, offering"],
   ["drawing a bow","fingers interlaced","pushing up glasses","catching a ball","writing with chopsticks","claw/monster hand"]
 ];
+var LESSONS = {
+  gesture:{t:'Gesture & the bean',links:[['Proko · gesture (video)','https://www.youtube.com/results?search_query=proko+gesture+drawing'],['Body proportions','https://en.wikipedia.org/wiki/Body_proportions']],lm:['Head, ribcage, pelvis are the 3 big masses; spine links them', 'Pit of neck, bottom of ribcage, hip bones (ASIS), knees, ankles'],co:['One C/S line of action through the whole pose', 'Bean: ribcage egg + pelvis box, squash on one side, stretch on the other', 'Stick limbs, then cylinders'],pr:['~7.5 heads tall (anime often 6–7); crotch at about half height', 'Shoulders ≈ 2 heads wide (men), hips ≈ 1.5–2'],mi:['Stiff, straight spines', 'Detail before the gesture is in', 'Both sides symmetric: no squash/stretch']},
+  torso:{t:'Torso: ribcage & pelvis',links:[['Proko · ribcage & pelvis (video)','https://www.youtube.com/results?search_query=proko+ribcage+pelvis+figure+drawing'],['Rib cage','https://en.wikipedia.org/wiki/Rib_cage']],lm:['Ribcage egg, sternum, rib arch (the upside-down V)', 'Pelvis: iliac crests, ASIS points, sacrum; navel sits between'],co:['Ribcage = egg tilted back; pelvis = bucket/box', 'Draw center line + cross-contour to show twist', 'Ribcage and pelvis tilt and rotate independently'],pr:['Ribcage ≈ 1.5 heads tall; gap to pelvis ≈ a fist', 'Pelvis about as wide as ribcage (wider in women)'],mi:['Torso as one rigid block', 'Forgetting the ribcage tilts back', 'No overlap on the bent side']},
+  arms:{t:'Arms & shoulders',links:[['Proko · arms (video)','https://www.youtube.com/results?search_query=proko+how+to+draw+arms'],['Arm','https://en.wikipedia.org/wiki/Arm']],lm:['Clavicle + scapula form the shoulder girdle; humerus', 'Elbow: olecranon point + two epicondyles; wrist: radius/ulna'],co:['Shoulder ball, upper-arm cylinder, forearm tapering box', 'Forearm twists: radius crosses ulna when palm turns down', 'Overlap the joint ellipses'],pr:['Elbow ≈ at bottom of ribcage/waist; wrist ≈ crotch level', 'Upper arm ≈ 1.5 heads, forearm ≈ 1.25'],mi:['Noodle arms with no elbow point', 'Same-width tubes: forget the forearm taper', 'Shoulders glued in place instead of rising/rolling']},
+  legs:{t:'Legs & hips',links:[['Proko · legs (video)','https://www.youtube.com/results?search_query=proko+how+to+draw+legs'],['Human leg','https://en.wikipedia.org/wiki/Human_leg']],lm:['Greater trochanter (hip bump), femur angles inward', 'Kneecap, tibia shin edge; inner ankle higher than outer'],co:['Thigh cylinder, knee box, calf cylinder tapering to ankle', 'Rhythm: outer curve high on thigh, inner curve low on calf', 'Weight leg sits under the neck in standing poses'],pr:['Leg ≈ half the body; knee ≈ midway hip to sole', 'Thigh slightly longer than shin'],mi:['Straight, parallel legs', 'Knees at the same height in contrapposto', 'Ankles with no inner/outer offset']},
+  feet:{t:'Feet',links:[['Proko · feet (video)','https://www.youtube.com/results?search_query=proko+how+to+draw+feet'],['Foot','https://en.wikipedia.org/wiki/Foot']],lm:['Heel (calcaneus), arch, ball of foot, toes', 'Inner ankle high, outer ankle low'],co:['Wedge/doorstop shape: high at ankle, slopes to toes', 'Heel box + arch + toe block; big toe separate', 'Toes grip the ground in tiny steps'],pr:['Foot length ≈ 1 head (≈ forearm length)', 'Big toe ≈ thumb-length; toes taper outward'],mi:['Flat, side-view feet in every pose', 'Forgetting the arch', 'Feet too small']},
+  head:{t:'Head construction (Loomis)',links:[['Proko · Loomis head (video)','https://www.youtube.com/results?search_query=proko+loomis+head+drawing'],['Human skull','https://en.wikipedia.org/wiki/Human_skull']],lm:['Cranium ball, brow ridge, cheekbones, jaw angle, chin', 'Ear sits behind the center line of the side plane'],co:['Ball + slice off the sides; add jaw plane', 'Center line + brow line wrap around the ball', 'Thirds: hairline → brow → nose → chin'],pr:['Eyes at half the head height; one eye-width between eyes', 'Ear spans brow to nose; anime: eyes lower & larger, jaw smaller'],mi:['Flat face with no side plane', 'Features drawn without the center line', 'Back of skull cut off']},
+  hands:{t:'Hands: construction',links:[['Proko · hands (video)','https://www.youtube.com/results?search_query=proko+how+to+draw+hands'],['Hand','https://en.wikipedia.org/wiki/Hand']],lm:['Wrist bones (carpals), 5 metacarpals, 14 phalanges', 'Knuckles form an arc, not a straight line'],co:['Palm = slightly wedged box; fingers = cylinders in 3 segments', 'Thumb = wedge from the wrist with its own fleshy pad', 'Draw the gesture curve of the fingers first'],pr:['Hand ≈ face length (chin to hairline)', 'Middle finger ≈ palm length; segments shrink toward the tip'],mi:['Fingers as sausages with no joints', 'All fingers parallel and same length', 'Thumb attached at the side like a sixth finger']},
+  expressions:{t:'Expressions: brows, eyes, mouth',links:[['Proko · expressions (video)','https://www.youtube.com/results?search_query=proko+facial+expressions'],['Facial muscles','https://en.wikipedia.org/wiki/Facial_muscles']],lm:['Brow muscles (corrugator/frontalis), eyelids, cheeks (zygomatic), mouth corners', 'Jaw hinges below the ear'],co:['Build the head ball first, then push the features', 'Brows + eyelids carry 70% of the emotion', 'Mouth shape and cheek lift must match (real smile lifts cheeks)'],pr:['Features keep their positions; only shapes change', 'Anime: exaggerate brows, eye shape, mouth size'],mi:['Only changing the mouth', 'Symmetric masks: tilt and asymmetry sell it', 'No squash/stretch of the head']}
+};
+var FIG_TOPICS=["gesture","torso","arms","legs","feet"];
+function lessonHtml(L){
+  function ul(a){ return "<ul>"+a.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ul>"; }
+  return '<div class="lesson"><b class="lt">Lesson: '+esc(L.t)+'</b>'+
+    '<h4>Key bones & landmarks</h4>'+ul(L.lm)+'<h4>Simplified construction</h4>'+ul(L.co)+
+    '<h4>Proportions</h4>'+ul(L.pr)+'<h4>Common mistakes</h4>'+ul(L.mi)+
+    '<h4>Learn more</h4><div class="links">'+L.links.map(function(l){return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+' ↗</a>';}).join("")+'</div></div>';
+}
 var DOW = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 var MODE_LABEL = {draw:"✏️ Draw", write:"📝 Write", both:"✨ Both", rest:"🌙 Rest"};
@@ -245,10 +268,11 @@ function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&a
 function planFor(d){
   var dow=d.getDay(), p={dow:dow, date:d};
   if(dow===1){
-    p.mode="draw"; p.title="Gesture → anime";
-    p.input="Open Line of Action and draw the random pose it gives you. Don't pick, just take the first one.";
-    p.btn="Open Line of Action"; p.url="https://line-of-action.com/practice-tools/app/figure-drawing";
-    p.output="Redraw that same pose as an anime character. Keep the gesture line; add hair, costume, a face.";
+    var ft=FIG_TOPICS[((weekIndex(d)%FIG_TOPICS.length)+FIG_TOPICS.length)%FIG_TOPICS.length]; p.lesson=LESSONS[ft];
+    p.mode="draw"; p.title="Figure: "+p.lesson.t;
+    p.input="Study today's lesson on "+p.lesson.t.toLowerCase()+". Sketch the construction once or twice while you read.";
+    p.btn="Open Line of Action (figures)"; p.url="https://line-of-action.com/practice-tools/app/figure-drawing";
+    p.output="Timed figure drawing: Line of Action, 1–2 min poses. On each, build the "+p.lesson.t.toLowerCase()+" with today's construction before any detail. Last 5 min: redraw your best pose as your OC.";
     p.notePh="Who did the pose become? (optional)";
   } else if(dow===2){
     p.mode="write"; p.title="Random Wikipedia scene";
@@ -259,10 +283,11 @@ function planFor(d){
   } else if(dow===3){
     var mg=pick(MANGA,d,"manga"); p.manga=mg;
     p.mode="draw"; p.title="Copy a panel: "+mg.t;
-    p.input="Find one panel from "+mg.t+" and copy it as closely as you can. First panel you like wins.";
+    p.lesson=LESSONS.head;
+    p.input="Study today's lesson on head construction, then find one panel from "+mg.t+" with a clear face.";
     p.btn="Find a "+mg.t+" panel"; p.url="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(mg.t+" manga panel");
     p.pickHtml="<b>"+esc(mg.t)+"</b><span>"+esc(mg.a)+" · "+esc(mg.s)+"</span>";
-    p.output="Draw your own character in that same style: same line weight, same eyes, same shading.";
+    p.output="Copy the panel's head by building it first: ball, center line, brow/nose/chin thirds, then the style on top. Then draw your OC's head at 2 angles in that same style.";
     p.notePh="Which panel did you copy? (optional)";
   } else if(dow===4){
     var r=pick(READS,d,"read"); p.read=r;
@@ -278,11 +303,12 @@ function planFor(d){
     var hands = weekIndex(d)%2!==0; p.drill = hands?"hands":"expressions";
     var set = pick(hands?HANDS:EXPRESSIONS, d, "drill");
     p.mode="draw"; p.title=hands?"Hands drill":"Expressions drill";
-    p.input="Draw these 6 "+(hands?"hands":"expressions")+" fast, about 90 seconds each. Use the reference tool if you get stuck.";
+    p.lesson=LESSONS[hands?"hands":"expressions"];
+    p.input="Study today's lesson on "+p.lesson.t.toLowerCase()+". Try the construction once on a quick sketch.";
     p.btn=hands?"Open hands reference":"Open faces reference";
     p.url="https://line-of-action.com/practice-tools/app/"+(hands?"hands-feet":"faces-expressions");
     p.pickHtml="<b>Draw 6 "+(hands?"hands":"expressions")+":</b><ol>"+set.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ol>";
-    p.output="Put them on an original character: one sheet, your OC, at least 3 of today's "+(hands?"hands":"expressions")+".";
+    p.output="Draw the 6 "+(hands?"hands":"expressions")+" (~2 min each) from the Line of Action reference, building each with today's construction first. Last 8 min: put at least 3 on your OC.";
     p.notePh="Which one was hardest? (optional)";
     p.alt = hands ? "Next Friday: expressions." : "Next Friday: hands.";
   } else if(dow===6){
@@ -304,6 +330,7 @@ function shortPick(p){
   if(p.manga) return p.manga.t;
   if(p.read) return p.read.t+" · "+p.read.a;
   if(p.drill) return p.drill==="hands"?"Hands week":"Expressions week";
+  if(p.lesson) return p.lesson.t;
   return "";
 }
 
@@ -339,7 +366,7 @@ function render(){
     '<span class="chip m-'+p.mode+'">'+MODE_LABEL[p.mode]+'</span></div>'+
     '<div class="headline">'+esc(p.title)+'</div>'+
     '<div class="step"><div class="steplabel" id="lblIn"><span class="n">1</span>10 min · Input</div>'+
-      '<p class="steptext">'+esc(p.input)+'</p>'+(p.pickHtml?'<div class="pick">'+p.pickHtml+'</div>':'')+btn+
+      '<p class="steptext">'+esc(p.input)+'</p>'+(p.lesson?lessonHtml(p.lesson):'')+(p.pickHtml?'<div class="pick">'+p.pickHtml+'</div>':'')+btn+
       (p.alt?'<div class="sub">'+esc(p.alt)+'</div>':'')+'</div>'+
     '<div class="step"><div class="steplabel" id="lblOut"><span class="n">2</span>20 min · Make</div>'+
       '<p class="steptext">'+esc(p.output)+'</p></div>';
